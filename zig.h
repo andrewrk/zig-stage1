@@ -68,7 +68,7 @@
 #if defined(__cplusplus)
 #define zig_extern_c extern "C"
 #else
-#define zig_extern_c
+#define zig_extern_c extern
 #endif
 
 #if zig_has_builtin(debugtrap)

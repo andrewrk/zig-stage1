@@ -50,7 +50,8 @@ $ ./zig1 build-obj ~/Downloads/zig/src/main.zig -ofmt=c --name zig2 --zig-lib-di
 Segmentation fault (core dumped)
 ```
 
-It appears to be stack overflow from infinite recursion:
+It appears to be stack overflow from running out of stack space (not infinite
+recursion):
 
 ```
 Thread 1 "zig1" received signal SIGSEGV, Segmentation fault.
@@ -114,4 +115,20 @@ codegen/c.zig:3498:16: 0x3e038eb in airBlock (zig)
 codegen/c.zig:2409:46: 0x3a064e7 in genBody (zig)
 codegen/c.zig:2178:16: 0x3a0351b in genFunc (zig)
 link/C.zig:150:20: 0x3a0a833 in updateFunc (zig)
+```
+
+## Status 3
+
+If we work around this by giving a giant stack size, we get further:
+
+```
+$ zig build-exe zig1.o -lc --stack 256000000
+$ ./zig1 build-obj ~/Downloads/zig/src/main.zig -ofmt=c --name zig2 --zig-lib-dir ~/Downloads/zig/lib --pkg-begin build_options options.zig --pkg-end -lc
+$ ~/local/llvm15-release/bin/clang-15 -c zig2.c -fbracket-depth=500 -I.
+zig2.c:20253:3: error: typedef redefinition with different types ('struct zig_T_struct_7bcorresponding_inst_3a_20u32_2c_20comptime_20operand_mapping_3a_20_5b_5dconst_20u2_20_3d_20__7b_200_2c_201_20_7d_7d' vs 'struct zig_T_struct_7bcorresponding_inst_3a_20u32_2c_20comptime_20operand_mapping_3a_20_5b_5dconst_20u2_20_3d_20__7b_200_2c_201_20_7d_7d')
+} zig_T_struct_7bcorresponding_inst_3a_20u32_2c_20comptime_20operand_mapping_3a_20_5b_5dconst_20u2_20_3d_20__7b_200_2c_201_20_7d_7d;
+  ^
+zig2.c:2655217:7: error: expected expression
+    * const t41 = ( * )&t34;
+      ^
 ```
