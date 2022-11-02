@@ -18,6 +18,8 @@ Segmentation fault (core dumped)
  * Requires a recent clang; older clang has compile errors
  * Requires clang; gcc has compile errors
  * Has not yet been tested with MSVC or other C compilers
+ * `-fbracket-depth=500`
+ * `-Wno-return-type`
  * The binary encounters a segmentation fault when it tries to call a libc function:
     ```
     94488	 zig_bool t20 = getenv("ZIG_VERBOSE_LINK") != NULL; /* var:verbose_link */
