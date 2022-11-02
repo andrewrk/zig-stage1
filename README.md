@@ -94,29 +94,6 @@ Thread 1 "zig1" received signal SIGSEGV, Segmentation fault.
 ...
 ```
 
-It appears to be a flaw in the C backend because when I repeat this command
-using a build of Zig with the LLVM backend, I get a different crash (which
-happens to be a crash *in* the C backend):
-
-```
-$ stage4/bin/zig build-obj ../src/main.zig -ofmt=c --pkg-begin build_options ~/dev/zig-stage1/options.zig --pkg-end 
-Semantic Analysis [19142] airAddSat... thread 1723396 panic: reached unreachable code
-...
-codegen/c.zig:1777:16: 0x3899d5f in renderType__anon_97481 (zig)
-codegen/c.zig:1669:78: 0x3898230 in renderType__anon_97481 (zig)
-codegen/c.zig:1841:26: 0x36da039 in renderTypeAndName__anon_81226 (zig)
-codegen/c.zig:293:28: 0x3deb5c5 in allocAlignedLocal (zig)
-codegen/c.zig:287:35: 0x3deb46b in allocLocal (zig)
-codegen/c.zig:3631:39: 0x3e03e76 in airBitcast (zig)
-codegen/c.zig:2410:48: 0x3a06580 in genBody (zig)
-codegen/c.zig:3723:16: 0x3e0c2d2 in airCondBr (zig)
-codegen/c.zig:2420:47: 0x3a06b83 in genBody (zig)
-codegen/c.zig:3498:16: 0x3e038eb in airBlock (zig)
-codegen/c.zig:2409:46: 0x3a064e7 in genBody (zig)
-codegen/c.zig:2178:16: 0x3a0351b in genFunc (zig)
-link/C.zig:150:20: 0x3a0a833 in updateFunc (zig)
-```
-
 ## Status 3
 
 If we work around this by giving a giant stack size, we get further:
