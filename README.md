@@ -6,8 +6,8 @@ code that outputs pure C code.
 ## Status:
 
 ```
-$ ~/local/llvm15-release/bin/clang-15 -c zig1.c -I. -fbracket-depth=500 -Wno-return-type
-$ ~/local/llvm15-release/bin/clang-15 -o compiler_rt.o c compiler_rt.c -I.
+$ ~/local/llvm15-release/bin/clang-15 -c zig1.c -fbracket-depth=500 -Wno-return-type
+$ ~/local/llvm15-release/bin/clang-15 -o compiler_rt.o c compiler_rt.c
 $ gcc -o zig1 zig1.o compiler_rt.o -lm
 ./zig1 build-obj ~/tmp/hello.zig -ofmt=c
 Segmentation fault (core dumped)

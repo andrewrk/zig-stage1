@@ -1,4 +1,4 @@
-#include <zig.h>
+#include "zig.h"
 
 typedef struct zig_S_math_F80__3431 zig_S_math_F80__3431;
 struct zig_S_math_F80__3431 {
