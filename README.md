@@ -32,3 +32,6 @@ Segmentation fault (core dumped)
     ```
  * The code quality of zig1.c should be improved in Zig's C backend before
    attempting to manually improve it. compiler-rt might already be OK.
+ * `warning: File zig1.c is 81.72 MB; this is larger than GitHub's recommended maximum file size of 50.00 MB`.
+   This file should be broken up into multiple components that get joined together with `#include`. Idea is
+   to avoid introducing cmake, make, or autoconf, or anything like this. Final goal is `cc -o zig1 zig1.c`.
