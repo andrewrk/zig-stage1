@@ -1,0 +1,23 @@
+pub const mem_leak_frames: u32 = 4;
+pub const skip_non_native: bool = false;
+pub const have_llvm: bool = false;
+pub const llvm_has_m68k: bool = false;
+pub const llvm_has_csky: bool = false;
+pub const llvm_has_arc: bool = false;
+pub const force_gpa: bool = false;
+pub const only_c: bool = false;
+pub const version: [:0]const u8 = "0.11.0-dev.stage1";
+pub const semver: @import("std").SemanticVersion = .{
+    .major = 0,
+    .minor = 11,
+    .patch = 0,
+    .pre = "dev",
+    .build = "stage1",
+};
+pub const enable_logging: bool = false;
+pub const enable_link_snapshots: bool = false;
+pub const enable_tracy: bool = false;
+pub const enable_tracy_callstack: bool = false;
+pub const enable_tracy_allocation: bool = false;
+pub const value_tracing: bool = false;
+pub const have_stage1: bool = false;
