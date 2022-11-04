@@ -68,6 +68,7 @@ __gehf2
 
 ## Issues
 
+ * The zig2 binary is not viable; does not pass x86_64-linux or wasm32-wasi behavior tests
  * Requires a recent clang or gcc; older compilers have compile errors
  * Compiling with clang requires `-fbracket-depth=500`
  * The large stack size flag is needed.
